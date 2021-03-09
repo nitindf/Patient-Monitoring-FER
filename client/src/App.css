@@ -1,0 +1,9 @@
+.dashboard-row-in-app
+{
+    display: flex;
+    align-items: center;
+    padding: 1vh;
+    margin: 2vh;
+    justify-content: space-around;   
+}
+
