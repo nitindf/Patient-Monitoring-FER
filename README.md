@@ -1,2 +1,10 @@
 # Patient-Monitoring-FER
-A web application to monitor patients using Facial Expression Recognition
+
+Install dependencies for server & client
+```
+npm install && npm run client-install
+```
+Run client & server with concurrently
+```
+npm run dev
+```
