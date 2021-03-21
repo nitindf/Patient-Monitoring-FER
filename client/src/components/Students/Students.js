@@ -12,7 +12,7 @@ class Students extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        if(props.message.msg) {
+        if (props.message.msg) {
             return {
                 feedback_msg: props.message.msg
             }
@@ -26,11 +26,11 @@ class Students extends Component {
         }
         this.props.getStudents(searchData);
     }
-    
+
     componentWillUnmount() {
         this.props.setMessage(null);
     }
-    
+
     searchStudent = (stage) => {
         const searchData = {
             stage: stage
@@ -45,9 +45,9 @@ class Students extends Component {
     onUpdateStudent = (student_id) => {
         this.props.history.push(`update-student/${student_id}`);
     }
-    
+
     onDeleteStudent = (student_id, student_stage) => {
-        if(window.confirm('Are You Sure ?')) {
+        if (window.confirm('Are You Sure ?')) {
             this.props.deleteStudent(student_id, student_stage);
             // this.props.getStudents({stage: student_stage});
         }
@@ -58,15 +58,15 @@ class Students extends Component {
         const { students, loading } = this.props.student;
 
         let tableContent;
-        if(loading === true && students === null) {
+        if (loading === true && students === null) {
             tableContent = <div className='text-center'><Spinner /></div>;
         }
-        else if(loading === false && students === null) {
+        else if (loading === false && students === null) {
             tableContent = <h1 className="display-4 text-danger">No Patients Found :(</h1>
         }
-        else {        
+        else {
             let studentsTable = students.map(student => {
-                return(
+                return (
                     <tr key={student._id}>
                         <td>{student.full_name}</td>
                         <td>{student.stage}</td>
@@ -76,7 +76,13 @@ class Students extends Component {
                             <button className='btn btn-danger btn-sm' onClick={() => this.onDeleteStudent(student._id, student.stage)}>Delete</button>
                         </td>
                         <td>
-                            <button className='btn btn-success btn-sm mr-1' /*onClick={() => this.onDeleteStudent(student._id, student.stage)}*/>View</button>
+                            {/* <button className='btn btn-success btn-sm mr-1'
+                                onClick={() => this.onDeleteStudent(student._id, student.stage)}>
+                                View
+                            </button> */}
+                            <a className='btn btn-success btn-sm mr-1' href={`/monitor-patient/${student._id}`} target="__blank">
+                                View
+                            </a>
                         </td>
                     </tr>
                 );
@@ -86,11 +92,11 @@ class Students extends Component {
                 <table className="table table-striped table-sm">
                     <thead>
                         <tr>
-                        <th scope="col">Full Name</th>
-                        <th scope="col">Stage</th>
-                        <th scope="col">Level</th>
-                        <th scope="col">Manage</th>
-                        <th scope="col">Monitor</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Stage</th>
+                            <th scope="col">Level</th>
+                            <th scope="col">Manage</th>
+                            <th scope="col">Monitor</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -102,26 +108,26 @@ class Students extends Component {
 
         return (
             <SidebarTemplate>
-            <div>
-                {/* Start Success Message */}
-                {(this.state.feedback_msg) ? 
-                    <div className={`alert alert-${this.state.feedback_msg.type} alert-dismissible fade show mt-3`} role="alert">
-                        <strong>{this.state.feedback_msg.content}</strong>
-                        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                <div>
+                    {/* Start Success Message */}
+                    {(this.state.feedback_msg) ?
+                        <div className={`alert alert-${this.state.feedback_msg.type} alert-dismissible fade show mt-3`} role="alert">
+                            <strong>{this.state.feedback_msg.content}</strong>
+                            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        : null}
+                    {/* End Success Message */}
+                    <br></br>
+                    <button className='btn btn-primary float-right mt-2' onClick={this.addStudent}><i className='fas fa-plus'></i> Add New Patient</button> <br /> <br />
+                    <div className='text-center mt-3'>
+
                     </div>
-                  : null}
-                {/* End Success Message */}
-                <br></br>
-                <button className='btn btn-primary float-right mt-2' onClick={this.addStudent}><i className='fas fa-plus'></i> Add New Patient</button> <br/> <br/>
-                <div className='text-center mt-3'>
-                   
+                    <div className='mt-5'>
+                        {tableContent}
+                    </div>
                 </div>
-                <div className='mt-5'>
-                  {tableContent}
-                </div>
-            </div>
             </SidebarTemplate>
         );
     }

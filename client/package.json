@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "face-api.js": "^0.22.2",
     "jwt-decode": "^2.2.0",
     "mern-auth": "file:..",
     "react": "^16.6.3",

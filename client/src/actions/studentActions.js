@@ -10,7 +10,7 @@ import {
 export const getStudents = (searchData) => (dispatch) => {
     dispatch(setLoading());
     axios
-        .post('/api/students/search', searchData)
+        .post('/api/patients/search', searchData)
         .then((res) => {
             dispatch({
                 type: GET_STUDENTS,
@@ -28,7 +28,7 @@ export const getStudents = (searchData) => (dispatch) => {
 export const getStudent = (student_id) => (dispatch) => {
     dispatch(setLoading());
     axios
-        .get(`/api/students/${student_id}`)
+        .get(`/api/patients/${student_id}`)
         .then((res) => {
             dispatch({
                 type: GET_STUDENT,
@@ -45,7 +45,7 @@ export const getStudent = (student_id) => (dispatch) => {
 
 export const createStudent = (studentData, history) => (dispatch) => {
     axios
-        .post('/api/students/create', studentData)
+        .post('/api/patients/create', studentData)
         .then(() => {
             const msg = {
                 content: 'Student Created Successfully',
@@ -63,8 +63,8 @@ export const createStudent = (studentData, history) => (dispatch) => {
 };
 
 export const updateStudent = (studentData, history, student_id) => dispatch => {
-    
-    axios.put(`/api/students/${student_id}`, studentData)
+
+    axios.put(`/api/patients/${student_id}`, studentData)
         .then(() => {
             const msg = {
                 content: 'Student Updated Successfully',
@@ -83,7 +83,7 @@ export const updateStudent = (studentData, history, student_id) => dispatch => {
 
 export const deleteStudent = (student_id, student_stage) => (dispatch) => {
     axios
-        .delete(`/api/students/${student_id}`)
+        .delete(`/api/patients/${student_id}`)
         .then(() => {
             dispatch(getStudents({ stage: student_stage }));
         })

@@ -15,6 +15,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Students from './components/Students/Students';
 import AddStudent from './components/AddStudent/AddStudent';
 import UpdateStudent from './components/UpdateStudent/UpdateStudent';
+import Monitor from "./components/Monitor";
 
 import "./App.css";
 
@@ -43,7 +44,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-          
+
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
@@ -51,14 +52,17 @@ class App extends Component {
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
             <Switch>
-                <PrivateRoute exact path={'/students'} component={Students} />
-           </Switch>
-           <Switch>
-                <PrivateRoute exact path={'/add-student'} component={AddStudent} />
-           </Switch>
-           <Switch>
-                <PrivateRoute exact path={'/update-student/:student_id'} component={UpdateStudent} />
-           </Switch>
+              <PrivateRoute exact path={'/students'} component={Students} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path={'/add-student'} component={AddStudent} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path={'/update-student/:student_id'} component={UpdateStudent} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path={'/monitor-patient/:patient_id'} component={Monitor} />
+            </Switch>
           </div>
         </Router>
       </Provider>

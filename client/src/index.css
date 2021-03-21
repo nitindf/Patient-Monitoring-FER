@@ -12,3 +12,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.video_out {
+	display: flex;
+	/* justify-content: center; */
+	position: absolute;
+}
+
+canvas {
+	position: absolute;
+}
