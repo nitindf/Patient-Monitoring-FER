@@ -54,7 +54,11 @@ router.post('/search', passport.authenticate('jwt', {session:false}), (req, res)
         .catch(() => res.status(404).json({notFound: 'couldn\'t find any students'}));
 });
 */
-
+router.post('/search', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Student.find({})
+        .then(result => res.status(200).json(result))
+        .catch(() => res.status(404).json({ notFound: 'Patient doesn\'t exist' }));
+});
 /*
 @req: get
 @route: /api/students/:student_id
@@ -83,11 +87,13 @@ router.put('/:student_id', passport.authenticate('jwt', {session: false}), (req,
     
     const studentData = {};
     studentData.full_name = req.body.full_name;
+    studentData.national_id = req.body.national_id;
+    studentData.phone = req.body.phone;
+    studentData.email = req.body.email;
     studentData.birth_date = req.body.birth_date;
     studentData.location = req.body.location;
     studentData.stage = req.body.stage;
     studentData.level = req.body.level;
-    studentData.parent_info = req.body.parent_info;
 
 
     Student.findOneAndUpdate({_id: req.params.student_id}, {$set: studentData}, {new: true, useFindAndModify: false})

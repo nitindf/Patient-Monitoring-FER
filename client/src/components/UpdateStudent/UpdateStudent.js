@@ -10,15 +10,14 @@ class UpdateStudent extends Component {
 
     state = {
         full_name: '',
+        national_id: '',
+        phone: '',
+        email: '',
         birth_date: '',
         location: '',
         stage: '',
         level: '',
-        parent_name: '',
-        phone: '',
-        national_id: '',
-        email: '',
-        primaryCheck: true,
+       
         errors: {}
     };
 
@@ -34,18 +33,17 @@ class UpdateStudent extends Component {
         if(nextProps.student.student) {
             const { student } = nextProps.student;
             student.location = IsEmpty(student.location)? '' : student.location; 
-            student.parent_info.email = IsEmpty(student.parent_info.email)? '' : student.parent_info.email;
+            student.email = IsEmpty(student.email)? '' : student.email;
         
             this.setState({
                 full_name: student.full_name,
+                national_id: student.national_id,
+                phone: student.phone,
+                email: student.email,
                 birth_date: student.birth_date,
                 location: student.location,
                 stage: student.stage,
                 level: student.level,
-                parent_name: student.parent_info.full_name,
-                phone: student.parent_info.phone,
-                national_id: student.parent_info.national_id,
-                email: student.parent_info.email,
             });
         }
 
@@ -59,70 +57,30 @@ class UpdateStudent extends Component {
         
         const studentData = {
             full_name: this.state.full_name,
+            national_id: this.state.national_id,
+            phone: this.state.phone,
+            email: this.state.email,
             birth_date: this.state.birth_date,
             location: this.state.location,
             stage: this.state.stage,
-            level: this.state.level,
-            parent_info: {
-                full_name: this.state.parent_name,
-                phone: this.state.phone,
-                national_id: this.state.national_id
-            }
+            level: this.state.level
         }
-        if(this.state.email) {
-            studentData.parent_info.email = this.state.email;
-        }
-
+        
         this.props.updateStudent(studentData, this.props.history, this.props.match.params.student_id);
     };
 
     onChangeHandler = (e) => {
         e.preventDefault();
         this.setState({[e.target.name]:e.target.value});
-        if(e.target.name === 'stage') {
-            if (e.target.value === 'primary') this.setState({ primaryCheck: true });
-            else this.setState({ primaryCheck: false });
-        }
     }
 
     render() {
         const { errors } = this.state;
 
-        const primary_level = (
-            <select 
-                className={classnames('custom-select', {'is-invalid':errors.level})}
-                name='level' 
-                id='level' 
-                onChange={this.onChangeHandler}
-                value={this.state.level}
-            >
-                <option value='1'>1</option>
-                <option value='2'>2</option>
-                <option value='3'>3</option>
-                <option value='4'>4</option>
-                <option value='5'>5</option>
-                <option value='6'>6</option>
-            </select>
-        );
-
-        const preparatory_secondary_level = (
-            <select 
-                className={classnames('custom-select', {'is-invalid':errors.level})} 
-                name='level' 
-                id='level' 
-                onChange={this.onChangeHandler}
-                value={this.state.level}
-            >
-                <option value='1'>1</option>
-                <option value='2'>2</option>
-                <option value='3'>3</option>
-            </select>
-        );
-
         return (
                 <SidebarTemplate>
                 <div>
-                <h1 className='text-center display-4'>Update Student</h1>
+                <h1 className='text-center display-4'>Update Patient Data</h1>
                 
                 <form className='mb-4' onSubmit={this.submitStudent}>
                     <div className='form-group'>
@@ -142,18 +100,70 @@ class UpdateStudent extends Component {
                             <strong>{errors.full_name}</strong>
                         </div>
                     </div>
+                    
+                    <div className='form-group'>
+                        <label htmlFor='national_id'>
+                            <span className='text-danger'>*</span> Patient ID
+                        </label>
+                        <input
+                            type='text'
+                            name='national_id'
+                            value={this.state.national_id}
+                            className={classnames('form-control', {'is-invalid':errors.parent_info_national_id})}
+                            id='national_id'
+                            placeholder="Enter Patient ID"
+                            onChange={this.onChangeHandler}
+                        />
+                        <div className="invalid-feedback">
+                            <strong>{errors.parent_info_national_id}</strong>
+                        </div>
+                    </div>
 
                     <div className='form-group'>
-                        <label htmlFor='birth_date'>
-                            <span className='text-danger'>*</span> Birth Date
+                        <label htmlFor='phone'>
+                            <span className='text-danger'>*</span> Phone Number
                         </label>
+                        <input
+                            type='text'
+                            name='phone'
+                            value={this.state.phone}
+                            className={classnames('form-control', {'is-invalid':errors.parent_info_phone})}
+                            id='phone'
+                            placeholder="Enter Patient's Phone number"
+                            onChange={this.onChangeHandler}
+                        />
+                        <div className="invalid-feedback">
+                            <strong>{errors.parent_info_phone}</strong>
+                        </div>
+                    </div>
+
+                    <div className='form-group'>
+                        <label htmlFor='email'>
+                            <span className='text-danger'>*</span> Email
+                        </label>
+                        <input
+                            type='email'
+                            name='email'
+                            value={this.state.email}
+                            className={classnames('form-control', {'is-invalid':errors.email})}
+                            id='email'
+                            placeholder='Enter Email ID'
+                            onChange={this.onChangeHandler}
+                        />
+                        <div className="invalid-feedback">
+                            <strong>{errors.email}</strong>
+                        </div>
+                    </div>
+
+                    <div className='form-group'>
+                        <label htmlFor='birth_date'> Date Of Birth</label>
                         <input
                             type='date'
                             name='birth_date'
-                            value={this.state.birth_date.split('T')[0]}
+                            value={this.state.birth_date}
                             className={classnames('form-control', {'is-invalid':errors.birth_date})}
                             id='birth_date'
-                            placeholder='Enter Student Birth Date'
+                            placeholder='Enter Patient Birth Date'
                             onChange={this.onChangeHandler}
                         />
                         <div className="invalid-feedback">
@@ -169,7 +179,7 @@ class UpdateStudent extends Component {
                             value={this.state.location}
                             className='form-control'
                             id='location'
-                            placeholder='Enter current household'
+                            placeholder='Enter current Address'
                             onChange={this.onChangeHandler}
                         />
                     </div>
@@ -185,9 +195,10 @@ class UpdateStudent extends Component {
                             onChange={this.onChangeHandler}
                             value={this.state.stage}
                         >
-                            <option value='primary'>Primary</option>
-                            <option value='preparatory'>Preparatory</option>
-                            <option value='secondary'>Secondary</option>
+                            <option value={0}>Select Stage</option>
+                            <option value='Pre-Treatment'>Pre-Treatment</option>
+                            <option value='Undergoing Treatment'>Undergoing Treatment</option>
+                            <option value='Post-Treatment'>Post-Treatment</option>
                         </select>
                         <div className="invalid-feedback">
                             <strong>{errors.stage}</strong>
@@ -196,96 +207,35 @@ class UpdateStudent extends Component {
 
                     <div className='form-group'>
                         <label htmlFor='level'>
-                            <span className='text-danger'>*</span> Level
+                            <span className='text-danger'>*</span> Critical Level
                         </label>
-                        {this.state.primaryCheck
-                            ? primary_level
-                            : preparatory_secondary_level}
-
+                        <select 
+                            className={classnames('custom-select', {'is-invalid':errors.level})}
+                            name='level' 
+                            id='level' 
+                            onChange={this.onChangeHandler}
+                            value={this.state.level}
+                        >
+                            <option value={0}>Select Critical Level</option>
+                            <option value='Very High'>Very High</option>
+                            <option value='High'>High</option>
+                            <option value='Normal'>Normal</option>
+                            <option value='Low'>Low</option>
+                            <option value='Very Low'>Very Low</option>
+                        </select>
                         <div className="invalid-feedback">
                             <strong>{errors.level}</strong>
                         </div>
                     </div>
-
+                
                     <hr />
-
-                    <h3>Parent Information:</h3>
-                    <div className='form-group'>
-                        <label htmlFor='parent_name'>
-                            <span className='text-danger'>*</span> Full Name
-                        </label>
-                        <input
-                            type='text'
-                            name='parent_name'
-                            value={this.state.parent_name}
-                            className={classnames('form-control', {'is-invalid':errors.parent_info_full_name})}
-                            id='parent_name'
-                            placeholder="Enter Parent's Full Name"
-                            onChange={this.onChangeHandler}
-                        />
-                        <div className="invalid-feedback">
-                            <strong>{errors.parent_info_full_name}</strong>
-                        </div>
-                    </div>
-
-                    <div className='form-group'>
-                        <label htmlFor='phone'>
-                            <span className='text-danger'>*</span> Phone Number
-                        </label>
-                        <input
-                            type='text'
-                            name='phone'
-                            value={this.state.phone}
-                            className={classnames('form-control', {'is-invalid':errors.parent_info_phone})}
-                            id='phone'
-                            placeholder="Enter Parent's phone number"
-                            onChange={this.onChangeHandler}
-                        />
-                        <div className="invalid-feedback">
-                            <strong>{errors.parent_info_phone}</strong>
-                        </div>
-                    </div>
-
-                    <div className='form-group'>
-                        <label htmlFor='national_id'>
-                            <span className='text-danger'>*</span> National ID
-                        </label>
-                        <input
-                            type='text'
-                            name='national_id'
-                            value={this.state.national_id}
-                            className={classnames('form-control', {'is-invalid':errors.parent_info_national_id})}
-                            id='national_id'
-                            placeholder="Enter parent's national id"
-                            onChange={this.onChangeHandler}
-                        />
-                        <div className="invalid-feedback">
-                            <strong>{errors.parent_info_national_id}</strong>
-                        </div>
-                    </div>
-
-                    <div className='form-group'>
-                        <label htmlFor='email'>Email</label>
-                        <input
-                            type='email'
-                            name='email'
-                            value={this.state.email}
-                            className={classnames('form-control', {'is-invalid':errors.parent_info_email})}
-                            id='email'
-                            placeholder='Enter email if exsists'
-                            onChange={this.onChangeHandler}
-                        />
-                        <div className="invalid-feedback">
-                            <strong>{errors.parent_info_email}</strong>
-                        </div>
-                    </div>
 
                     <div className='text-center'>
                         <button
                             type='submit'
                             className='btn btn-success btn-block'
                         >
-                            Save Student
+                            Update
                         </button>
                     </div>
                 </form>

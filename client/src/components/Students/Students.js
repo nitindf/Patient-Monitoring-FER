@@ -75,6 +75,9 @@ class Students extends Component {
                             <button className='btn btn-success btn-sm mr-1' onClick={() => this.onUpdateStudent(student._id)}>Update</button>
                             <button className='btn btn-danger btn-sm' onClick={() => this.onDeleteStudent(student._id, student.stage)}>Delete</button>
                         </td>
+                        <td>
+                            <button className='btn btn-success btn-sm mr-1' /*onClick={() => this.onDeleteStudent(student._id, student.stage)}*/>View</button>
+                        </td>
                     </tr>
                 );
             });
@@ -87,6 +90,7 @@ class Students extends Component {
                         <th scope="col">Stage</th>
                         <th scope="col">Level</th>
                         <th scope="col">Manage</th>
+                        <th scope="col">Monitor</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -112,11 +116,7 @@ class Students extends Component {
                 <br></br>
                 <button className='btn btn-primary float-right mt-2' onClick={this.addStudent}><i className='fas fa-plus'></i> Add New Patient</button> <br/> <br/>
                 <div className='text-center mt-3'>
-                    <div className="btn-group" role="group">
-                        {/*<button type="button" className="btn btn-dark btn-lg" onClick={() => this.searchStudent('primary')}>Primary</button>
-                        <button type="button" className="btn btn-dark btn-lg" onClick={() => this.searchStudent('preparatory')}>Preparatory</button>
-                        <button type="button" className="btn btn-dark btn-lg" onClick={() => this.searchStudent('secondary')}>Secondary</button>*/}
-                    </div>
+                   
                 </div>
                 <div className='mt-5'>
                   {tableContent}

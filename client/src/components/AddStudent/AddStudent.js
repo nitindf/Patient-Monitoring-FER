@@ -192,7 +192,7 @@ class AddStudent extends Component {
                             <option value={0}>Select Critical Level</option>
                             <option value='Very High'>Very High</option>
                             <option value='High'>High</option>
-                            <option value='Norma'>Normal</option>
+                            <option value='Normal'>Normal</option>
                             <option value='Low'>Low</option>
                             <option value='Very Low'>Very Low</option>
                         </select>

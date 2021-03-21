@@ -37,9 +37,7 @@ class SidebarTemplate extends Component {
                         <h3>{user.name}</h3> 
                     </div>
                     <div className="list-group list-group-flush">
-                        {/*<Link to='/dashboard' className='list-group-item list-group-item-action bg-dark text-light'><i className="fas fa-tachometer-alt"></i> Dashboard</Link>*/}
                         <Link to='/students' className='list-group-item list-group-item-action bg-dark text-light'><i className="fas fa-users"></i> My Patients</Link>
-                        {/*<Link to='/search' className='list-group-item list-group-item-action bg-dark text-light'><i className="fas fa-search"></i> Search</Link>*/}
                     </div>
                 </div>
                 {/*  /#sidebar-wrapper */}
