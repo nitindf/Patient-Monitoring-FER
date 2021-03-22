@@ -6,14 +6,14 @@ const validateInputs = (data) => {
     let errorsFound;
 
     data.full_name = IsEmpty(data.full_name) ? '' : data.full_name;
-    // data.national_id = IsEmpty(data.national_id) ? '' : data.national_id;
+    data.national_id = IsEmpty(data.national_id) ? '' : data.national_id;
     data.phone = IsEmpty(data.phone) ? '' : data.phone;
     data.birth_date = IsEmpty(data.birth_date) ? '' : data.birth_date;
     data = IsEmpty(data) ? '' : data;
 
 
 
-    // student full name validation
+    // patient full name validation
     if (validator.isEmpty(data.full_name)) {
         errors.full_name = 'Enter Patient\'s Full Name';
     }
@@ -22,6 +22,9 @@ const validateInputs = (data) => {
     // if (!validator.isLength(data.national_id, { min: 1, max: 12 })) {
     //     errors.national_id = 'Patient ID Must Be Exactly 14 Digits';
     // }
+     if (validator.isEmpty(data.national_id)) {
+         errors.national_id = 'Enter Patient ID';
+    }
 
     // patient number validation
     if (!validator.isLength(data.phone, { min: 6 })) {

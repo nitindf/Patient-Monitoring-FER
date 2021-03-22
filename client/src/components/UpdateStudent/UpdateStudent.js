@@ -109,13 +109,13 @@ class UpdateStudent extends Component {
                                 type='text'
                                 name='national_id'
                                 value={this.state.national_id}
-                                className={classnames('form-control', { 'is-invalid': errors.parent_info_national_id })}
+                                className={classnames('form-control', { 'is-invalid': errors.national_id })}
                                 id='national_id'
                                 placeholder="Enter Patient ID"
                                 onChange={this.onChangeHandler}
                             />
                             <div className="invalid-feedback">
-                                <strong>{errors.parent_info_national_id}</strong>
+                                <strong>{errors.national_id}</strong>
                             </div>
                         </div>
 
@@ -127,13 +127,13 @@ class UpdateStudent extends Component {
                                 type='text'
                                 name='phone'
                                 value={this.state.phone}
-                                className={classnames('form-control', { 'is-invalid': errors.parent_info_phone })}
+                                className={classnames('form-control', { 'is-invalid': errors.phone })}
                                 id='phone'
                                 placeholder="Enter Patient's Phone number"
                                 onChange={this.onChangeHandler}
                             />
                             <div className="invalid-feedback">
-                                <strong>{errors.parent_info_phone}</strong>
+                                <strong>{errors.phone}</strong>
                             </div>
                         </div>
 

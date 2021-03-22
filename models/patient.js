@@ -7,6 +7,10 @@ const patientSchema = new Schema({
         type: String,
         required: true
     },
+    national_id: {
+        type: String,
+        required: true
+    },
     phone: {
         type: String,
         required: true

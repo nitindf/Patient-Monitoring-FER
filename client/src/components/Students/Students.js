@@ -76,12 +76,12 @@ class Students extends Component {
                             <button className='btn btn-danger btn-sm' onClick={() => this.onDeleteStudent(student._id, student.stage)}>Delete</button>
                         </td>
                         <td>
-                            {/* <button className='btn btn-success btn-sm mr-1'
-                                onClick={() => this.onDeleteStudent(student._id, student.stage)}>
-                                View
-                            </button> */}
                             <a className='btn btn-success btn-sm mr-1' href={`/monitor-patient/${student._id}`} target="__blank">
-                                View
+                                Go
+                            </a>
+                
+                            <a className='btn btn-success btn-sm mr-1' href={`/monitor-patient/${student._id}`} target="__blank">
+                                View Report
                             </a>
                         </td>
                     </tr>
@@ -94,7 +94,7 @@ class Students extends Component {
                         <tr>
                             <th scope="col">Full Name</th>
                             <th scope="col">Stage</th>
-                            <th scope="col">Level</th>
+                            <th scope="col">Critical Level</th>
                             <th scope="col">Manage</th>
                             <th scope="col">Monitor</th>
                         </tr>

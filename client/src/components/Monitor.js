@@ -93,7 +93,7 @@ const Monitor = (props) => {
   return (
     <SidebarTemplate>
       <div className="Monitor" >
-        <span>{initializing ? 'Initializing' : 'Ready'}</span>
+        <span>{initializing ? 'Loading' : 'Ready'}</span>
         <div className="video_out" id="video_out">
           <video ref={videoRef}
             autoPlay

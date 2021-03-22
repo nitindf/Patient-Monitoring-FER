@@ -11,7 +11,7 @@ const passport = require('passport');
 @access: private
 */
 router.post('/create',
-    // passport.authenticate('jwt', { session: false }), 
+    passport.authenticate('jwt', { session: false }), 
     (req, res) => {
         console.log(Patient)
         const { errors, errorsFound } = validateInputs(req.body);
@@ -22,6 +22,7 @@ router.post('/create',
 
         const patientData = {};
         patientData.full_name = req.body.full_name;
+        patientData.national_id = req.body.national_id;
         patientData.phone = req.body.phone;
         patientData.email = req.body.email;
         patientData.birth_date = req.body.birth_date;
@@ -44,7 +45,7 @@ router.post('/create',
 */
 
 router.post('/search',
-    // passport.authenticate('jwt', { session: false }), 
+    passport.authenticate('jwt', { session: false }), 
     (req, res) => {
         Patient.find({})
             .then(result => res.status(200).json(result))
@@ -59,7 +60,7 @@ router.post('/search',
 @access: private
 */
 router.get('/:patient_id',
-    // passport.authenticate('jwt', { session: false }), 
+    passport.authenticate('jwt', { session: false }), 
     (req, res) => {
         Patient.findById(req.params.patient_id)
             .then(result => res.status(200).json(result))
@@ -73,14 +74,14 @@ router.get('/:patient_id',
 @access: private
 */
 router.put('/:patient_id',
-    // passport.authenticate('jwt', { session: false }), 
+    passport.authenticate('jwt', { session: false }), 
     (req, res) => {
 
-        // const { errors, errorsFound } = validateInputs(req.body);
+        //  const { errors, errorsFound } = validateInputs(req.body);
 
-        // if (errorsFound) {
-        //     return res.status(400).json(errors);
-        // }
+        //  if (errorsFound) {
+        //      return res.status(400).json(errors);
+        //  }
 
         Patient.findOneAndUpdate({ _id: req.params.patient_id }, { $set: req.body }, { new: true, useFindAndModify: false })
             .then(result => {
@@ -98,7 +99,7 @@ router.put('/:patient_id',
 @access: private
 */
 router.delete('/:patient_id',
-    // passport.authenticate('jwt', { session: false }), 
+    passport.authenticate('jwt', { session: false }), 
     (req, res) => {
         Patient.findByIdAndDelete(req.params.patient_id)
             .then(() => res.status(200).json({ msg: 'Patient deleted successfully' }))
