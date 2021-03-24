@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as faceapi from 'face-api.js';
-import SidebarTemplate from './common/SidebarTemplate/SidebarTemplate';
+import SidebarTemplate from '../common/SidebarTemplate/SidebarTemplate';
 import axios from 'axios';
-import Date from "../utils/dateUtil";
+import Date from "../../utils/dateUtil";
 const MODEL_URL = process.env.PUBLIC_URL + '/models'
 const displaySize = {
   height: 600,
   width: 600
 }
-
 
 const Monitor = (props) => {
   const [initializing, setInitializing] = useState(false)
@@ -24,7 +23,6 @@ const Monitor = (props) => {
         faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
         faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
         faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
-        // faceapi.nets.ageGenderNet.loadFromUri(MODEL_URL),
       ]).then(startVideo)
     }
     loadModels();

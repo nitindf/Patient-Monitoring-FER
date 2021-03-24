@@ -55,12 +55,12 @@ const validateInputs = (data) => {
         errors.birth_date = 'Birth date is not valid';
     }
 
-    // student stage validation
+    // patient stage validation
     if (validator.isEmpty(data.stage)) {
         errors.stage = 'Select Patient\'s Stage';
     }
 
-    // student level validation
+    // patient level validation
     if (validator.isEmpty(data.level)) {
         errors.level = 'Select Patient\'s Level';
     }

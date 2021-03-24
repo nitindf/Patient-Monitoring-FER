@@ -3,9 +3,9 @@ import SidebarTemplate from '../common/SidebarTemplate/SidebarTemplate';
 import Spinner from '../common/Spinner';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getStudents, setMessage, deleteStudent } from '../../actions/studentActions';
+import { getPatients, setMessage, deletePatient } from '../../actions/patientActions';
 
-class Students extends Component {
+class Patients extends Component {
 
     state = {
         feedback_msg: null
@@ -24,65 +24,68 @@ class Students extends Component {
         const searchData = {
             stage: 'primary'
         }
-        this.props.getStudents(searchData);
+        this.props.getPatients(searchData);
     }
 
     componentWillUnmount() {
         this.props.setMessage(null);
     }
 
-    searchStudent = (stage) => {
+    searchPatient = (stage) => {
         const searchData = {
             stage: stage
         }
-        this.props.getStudents(searchData);
+        this.props.getPatients(searchData);
     }
 
-    addStudent = () => {
-        this.props.history.push('/add-student');
+    addPatient = () => {
+        this.props.history.push('/add-patient');
     }
 
-    onUpdateStudent = (student_id) => {
-        this.props.history.push(`update-student/${student_id}`);
+    onUpdatePatient = (patient_id) => {
+        this.props.history.push(`update-patient/${patient_id}`);
     }
 
-    onDeleteStudent = (student_id, student_stage) => {
+    onReport = (patient_id) => {
+        this.props.history.push(`report/${patient_id}`);
+    }
+
+
+    onDeletePatient = (patient_id, patient_stage) => {
         if (window.confirm('Are You Sure ?')) {
-            this.props.deleteStudent(student_id, student_stage);
-            // this.props.getStudents({stage: student_stage});
+            this.props.deletePatient(patient_id, patient_stage);
+            // this.props.getPatients({stage: patient_stage});
         }
     }
 
     render() {
 
-        const { students, loading } = this.props.student;
+        const { patients, loading } = this.props.patient;
 
         let tableContent;
-        if (loading === true && students === null) {
+        if (loading === true && patients === null) {
             tableContent = <div className='text-center'><Spinner /></div>;
         }
-        else if (loading === false && students === null) {
+        else if (loading === false && patients === null) {
             tableContent = <h1 className="display-4 text-danger">No Patients Found :(</h1>
         }
         else {
-            let studentsTable = students.map(student => {
+            let patientsTable = patients.map(patient => {
                 return (
-                    <tr key={student._id}>
-                        <td>{student.full_name}</td>
-                        <td>{student.stage}</td>
-                        <td>{student.level}</td>
+                    <tr key={patient._id}>
+                        <td>{patient.full_name}</td>
+                        <td>{patient.stage}</td>
+                        <td>{patient.level}</td>
                         <td>
-                            <button className='btn btn-success btn-sm mr-1' onClick={() => this.onUpdateStudent(student._id)}>Update</button>
-                            <button className='btn btn-danger btn-sm' onClick={() => this.onDeleteStudent(student._id, student.stage)}>Delete</button>
+                            <button className='btn btn-success btn-sm mr-1' onClick={() => this.onUpdatePatient(patient._id)}>Update</button>
+                            <button className='btn btn-danger btn-sm' onClick={() => this.onDeletePatient(patient._id, patient.stage)}>Delete</button>
                         </td>
                         <td>
-                            <a className='btn btn-success btn-sm mr-1' href={`/monitor-patient/${student._id}`} target="__blank">
+                            <a className='btn btn-success btn-sm mr-1' href={`/monitor-patient/${patient._id}`} target="__blank">
                                 Go
                             </a>
-                
-                            <a className='btn btn-success btn-sm mr-1' href={`/monitor-patient/${student._id}`} target="__blank">
-                                View Report
-                            </a>
+                            
+                            <button className='btn btn-success btn-sm mr-1' onClick={() => this.onReport(patient._id)}>View Report</button>
                         </td>
                     </tr>
                 );
@@ -100,7 +103,7 @@ class Students extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {studentsTable}
+                        {patientsTable}
                     </tbody>
                 </table>
             );
@@ -120,7 +123,7 @@ class Students extends Component {
                         : null}
                     {/* End Success Message */}
                     <br></br>
-                    <button className='btn btn-primary float-right mt-2' onClick={this.addStudent}><i className='fas fa-plus'></i> Add New Patient</button> <br /> <br />
+                    <button className='btn btn-primary float-right mt-2' onClick={this.addPatient}><i className='fas fa-plus'></i> Add New Patient</button> <br /> <br />
                     <div className='text-center mt-3'>
 
                     </div>
@@ -133,17 +136,17 @@ class Students extends Component {
     }
 }
 
-Students.propTypes = {
-    student: PropTypes.object.isRequired,
+Patients.propTypes = {
+    patient: PropTypes.object.isRequired,
     message: PropTypes.object.isRequired,
-    getStudents: PropTypes.func.isRequired,
+    getPatients: PropTypes.func.isRequired,
     setMessage: PropTypes.func.isRequired,
-    deleteStudent: PropTypes.func.isRequired,
+    deletePatient: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
-    student: state.student,
+    patient: state.patient,
     message: state.message
 })
 
-export default connect(mapStateToProps, { getStudents, setMessage, deleteStudent })(Students);
+export default connect(mapStateToProps, { getPatients, setMessage, deletePatient })(Patients);

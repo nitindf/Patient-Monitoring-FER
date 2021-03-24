@@ -12,10 +12,11 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
-import Students from './components/Students/Students';
-import AddStudent from './components/AddStudent/AddStudent';
-import UpdateStudent from './components/UpdateStudent/UpdateStudent';
-import Monitor from "./components/Monitor";
+import Patients from './components/Patients/Patients';
+import AddPatient from './components/AddPatient/AddPatient';
+import UpdatePatient from './components/UpdatePatient/UpdatePatient';
+import Monitor from "./components/Monitor/Monitor";
+import Report from "./components/Report/Report";
 
 import "./App.css";
 
@@ -29,7 +30,9 @@ if (localStorage.jwtToken) {
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
   // Check for expired token
-  const currentTime = Date.now() / 1000; // to get in milliseconds
+ 
+  const currentTime = Date.now() / 1000; 
+  // to get in milliseconds
   if (decoded.exp < currentTime) {
     // Logout user
     store.dispatch(logoutUser());
@@ -52,21 +55,25 @@ class App extends Component {
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
             <Switch>
-              <PrivateRoute exact path={'/students'} component={Students} />
+              <PrivateRoute exact path={'/patients'} component={Patients} />
             </Switch>
             <Switch>
-              <PrivateRoute exact path={'/add-student'} component={AddStudent} />
+              <PrivateRoute exact path={'/add-patient'} component={AddPatient} />
             </Switch>
             <Switch>
-              <PrivateRoute exact path={'/update-student/:student_id'} component={UpdateStudent} />
+              <PrivateRoute exact path={'/update-patient/:patient_id'} component={UpdatePatient} />
             </Switch>
             <Switch>
               <PrivateRoute exact path={'/monitor-patient/:patient_id'} component={Monitor} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path={'/report/:patient_id'} component={Report} />
             </Switch>
           </div>
         </Router>
       </Provider>
     );
+
   }
 }
 export default App;

@@ -37,7 +37,7 @@ class SidebarTemplate extends Component {
                         <h3>{user.name}</h3> 
                     </div>
                     <div className="list-group list-group-flush">
-                        <Link to='/students' className='list-group-item list-group-item-action bg-dark text-light'><i className="fas fa-users"></i> My Patients</Link>
+                        <Link to='/patients' className='list-group-item list-group-item-action bg-dark text-light'><i className="fas fa-users"></i> My Patients</Link>
                     </div>
                 </div>
                 {/*  /#sidebar-wrapper */}

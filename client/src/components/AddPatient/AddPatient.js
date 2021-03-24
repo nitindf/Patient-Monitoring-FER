@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import SidebarTemplate from '../common/SidebarTemplate/SidebarTemplate';
 import classnames from 'classnames';
 import { connect } from 'react-redux'; 
-import { createStudent, clearErrors } from '../../actions/studentActions';
+import { createPatient, clearErrors } from '../../actions/patientActions';
 
-class AddStudent extends Component {
+class AddPatient extends Component {
     state = {
         full_name: '',
         national_id: '',
@@ -30,10 +30,10 @@ class AddStudent extends Component {
         }
     }
 
-    submitStudent = (e) => {
+    submitPatient = (e) => {
         e.preventDefault();
         
-        const studentData = {
+        const patientData = {
             full_name: this.state.full_name,
             national_id: this.state.national_id,
             phone: this.state.phone,
@@ -44,7 +44,7 @@ class AddStudent extends Component {
             level: this.state.level
         }
 
-        this.props.createStudent(studentData, this.props.history);
+        this.props.createPatient(patientData, this.props.history);
 
     };
 
@@ -63,7 +63,7 @@ class AddStudent extends Component {
                 <div>
                 <h1 className='text-center display-4'>Add Patient Data</h1>
                 
-                <form className='mb-4' onSubmit={this.submitStudent}>
+                <form className='mb-4' onSubmit={this.submitPatient}>
                     <div className='form-group'>
                         <label htmlFor='full_name'>
                             <span className='text-danger'>*</span> Full Name
@@ -222,4 +222,4 @@ const mapStateToProps = (state) => ({
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { createStudent, clearErrors })(AddStudent);
+export default connect(mapStateToProps, { createPatient, clearErrors })(AddPatient);

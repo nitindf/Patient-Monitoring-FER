@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const Patient = require('../../models/patient');
-const validateInputs = require('../../validation/students');
+const validateInputs = require('../../validation/patients');
 const passport = require('passport');
 
 /*
 @req: post
 @route: /api/patients/create
-@description: create a new student
+@description: create a new patient
 @access: private
 */
 router.post('/create',
@@ -29,6 +29,7 @@ router.post('/create',
         patientData.location = req.body.location;
         patientData.stage = req.body.stage;
         patientData.level = req.body.level;
+        //patientData.recordings = req.body.recordings.time;
 
         const patient = new Patient(patientData);
         patient.save()
@@ -40,7 +41,7 @@ router.post('/create',
 /*
 @req: post
 @route: /api/patients/search
-@description: search form for students
+@description: search form for patients
 @access: private
 */
 
@@ -56,7 +57,7 @@ router.post('/search',
 /*
 @req: get
 @route: /api/patients/:patient_id
-@description: find student by id
+@description: find patient by id
 @access: private
 */
 router.get('/:patient_id',
@@ -70,7 +71,7 @@ router.get('/:patient_id',
 /*
 @req: put
 @route: /api/patients/:patient_id
-@description: update student by id
+@description: update patient by id
 @access: private
 */
 router.put('/:patient_id',
@@ -95,7 +96,7 @@ router.put('/:patient_id',
 /*
 @req: delete
 @route: /api/patients/:patient_id
-@description: delete student by id
+@description: delete patient by id
 @access: private
 */
 router.delete('/:patient_id',

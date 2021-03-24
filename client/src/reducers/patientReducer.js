@@ -1,26 +1,26 @@
-import { SET_LOADING, GET_STUDENTS, GET_STUDENT } from '../actions/types';
+import { SET_LOADING, GET_PATIENTS, GET_PATIENT } from '../actions/types';
 
 const initialState = {
-    student: null,
-    students: null,
+    patient: null,
+    patients: null,
     loading: false
 }
 
-const studentReducer = (state = initialState, action) => {
+const patientReducer = (state = initialState, action) => {
 
     switch(action.type) {
 
-        case GET_STUDENTS:
+        case GET_PATIENTS:
             return {
                 ...state,
-                students: action.payload,
+                patients: action.payload,
                 loading: false
             }
 
-        case GET_STUDENT:
+        case GET_PATIENT:
             return {
                 ...state,
-                student: action.payload,
+                patient: action.payload,
                 loading: false
             }
 
@@ -36,4 +36,4 @@ const studentReducer = (state = initialState, action) => {
 
 }
 
-export default studentReducer;
+export default patientReducer;

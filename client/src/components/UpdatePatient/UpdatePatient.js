@@ -3,10 +3,10 @@ import SidebarTemplate from '../common/SidebarTemplate/SidebarTemplate';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getStudent, updateStudent, clearErrors } from '../../actions/studentActions';
+import { getPatient, updatePatient, clearErrors } from '../../actions/patientActions';
 import IsEmpty from '../../validation/IsEmpty';
 
-class UpdateStudent extends Component {
+class UpdatePatient extends Component {
 
     state = {
         full_name: '',
@@ -22,7 +22,7 @@ class UpdateStudent extends Component {
     };
 
     componentDidMount() {
-        this.props.getStudent(this.props.match.params.student_id);
+        this.props.getPatient(this.props.match.params.patient_id);
     }
 
     componentWillUnmount() {
@@ -30,20 +30,20 @@ class UpdateStudent extends Component {
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
-        if (nextProps.student.student) {
-            const { student } = nextProps.student;
-            student.location = IsEmpty(student.location) ? '' : student.location;
-            student.email = IsEmpty(student.email) ? '' : student.email;
+        if (nextProps.patient.patient) {
+            const { patient } = nextProps.patient;
+            patient.location = IsEmpty(patient.location) ? '' : patient.location;
+            patient.email = IsEmpty(patient.email) ? '' : patient.email;
 
             this.setState({
-                full_name: student.full_name,
-                national_id: student.national_id,
-                phone: student.phone,
-                email: student.email,
-                birth_date: student.birth_date,
-                location: student.location,
-                stage: student.stage,
-                level: student.level,
+                full_name: patient.full_name,
+                national_id: patient.national_id,
+                phone: patient.phone,
+                email: patient.email,
+                birth_date: patient.birth_date,
+                location: patient.location,
+                stage: patient.stage,
+                level: patient.level,
             });
         }
 
@@ -52,10 +52,10 @@ class UpdateStudent extends Component {
         }
     }
 
-    submitStudent = (e) => {
+    submitPatient = (e) => {
         e.preventDefault();
 
-        const studentData = {
+        const patientData = {
             full_name: this.state.full_name,
             national_id: this.state.national_id,
             phone: this.state.phone,
@@ -66,7 +66,7 @@ class UpdateStudent extends Component {
             level: this.state.level
         }
 
-        this.props.updateStudent(studentData, this.props.history, this.props.match.params.student_id);
+        this.props.updatePatient(patientData, this.props.history, this.props.match.params.patient_id);
     };
 
     onChangeHandler = (e) => {
@@ -82,7 +82,7 @@ class UpdateStudent extends Component {
                 <div>
                     <h1 className='text-center display-4'>Update Patient Data</h1>
 
-                    <form className='mb-4' onSubmit={this.submitStudent}>
+                    <form className='mb-4' onSubmit={this.submitPatient}>
                         <div className='form-group'>
                             <label htmlFor='full_name'>
                                 <span className='text-danger'>*</span> Full Name
@@ -93,7 +93,7 @@ class UpdateStudent extends Component {
                                 value={this.state.full_name}
                                 className={classnames('form-control', { 'is-invalid': errors.full_name })}
                                 id='full_name'
-                                placeholder='Enter Student Full Name'
+                                placeholder='Enter Patient Full Name'
                                 onChange={this.onChangeHandler}
                             />
                             <div className="invalid-feedback">
@@ -246,17 +246,17 @@ class UpdateStudent extends Component {
 }
 
 
-UpdateStudent.propTypes = {
+UpdatePatient.propTypes = {
     errors: PropTypes.object.isRequired,
-    student: PropTypes.object.isRequired,
-    getStudent: PropTypes.func.isRequired,
-    updateStudent: PropTypes.func.isRequired,
+    patient: PropTypes.object.isRequired,
+    getPatient: PropTypes.func.isRequired,
+    updatePatient: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
     errors: state.errors,
-    student: state.student
+    patient: state.patient
 });
 
-export default connect(mapStateToProps, { getStudent, updateStudent, clearErrors })(UpdateStudent);
+export default connect(mapStateToProps, { getPatient, updatePatient, clearErrors })(UpdatePatient);

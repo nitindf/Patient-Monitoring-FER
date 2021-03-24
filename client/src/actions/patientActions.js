@@ -1,37 +1,37 @@
 import axios from 'axios';
 import {
     SET_LOADING,
-    GET_STUDENTS,
-    GET_STUDENT,
+    GET_PATIENTS,
+    GET_PATIENT,
     GET_ERRORS,
     SET_MESSAGE
 } from './types';
 
-export const getStudents = (searchData) => (dispatch) => {
+export const getPatients = (searchData) => (dispatch) => {
     dispatch(setLoading());
     axios
         .post('/api/patients/search', searchData)
         .then((res) => {
             dispatch({
-                type: GET_STUDENTS,
+                type: GET_PATIENTS,
                 payload: res.data
             });
         })
         .catch(() => {
             dispatch({
-                type: GET_STUDENTS,
+                type: GET_PATIENTS,
                 payload: null
             });
         });
 };
 
-export const getStudent = (student_id) => (dispatch) => {
+export const getPatient = (patient_id) => (dispatch) => {
     dispatch(setLoading());
     axios
-        .get(`/api/patients/${student_id}`)
+        .get(`/api/patients/${patient_id}`)
         .then((res) => {
             dispatch({
-                type: GET_STUDENT,
+                type: GET_PATIENT,
                 payload: res.data
             });
         })
@@ -43,16 +43,16 @@ export const getStudent = (student_id) => (dispatch) => {
         });
 };
 
-export const createStudent = (studentData, history) => (dispatch) => {
+export const createPatient = (patientData, history) => (dispatch) => {
     axios
-        .post('/api/patients/create', studentData)
+        .post('/api/patients/create', patientData)
         .then(() => {
             const msg = {
-                content: 'Student Created Successfully',
+                content: 'Patient Created Successfully',
                 type: 'success'
             };
             dispatch(setMessage(msg));
-            history.push('/students');
+            history.push('/patients');
         })
         .catch((err) => {
             dispatch({
@@ -62,16 +62,16 @@ export const createStudent = (studentData, history) => (dispatch) => {
         });
 };
 
-export const updateStudent = (studentData, history, student_id) => dispatch => {
+export const updatePatient = (patientData, history, patient_id) => dispatch => {
 
-    axios.put(`/api/patients/${student_id}`, studentData)
+    axios.put(`/api/patients/${patient_id}`, patientData)
         .then(() => {
             const msg = {
-                content: 'Student Updated Successfully',
+                content: 'Patient Updated Successfully',
                 type: 'success'
             };
             dispatch(setMessage(msg));
-            history.push('/students');
+            history.push('/patients');
         })
         .catch((err) => {
             dispatch({
@@ -81,11 +81,11 @@ export const updateStudent = (studentData, history, student_id) => dispatch => {
         });
 }
 
-export const deleteStudent = (student_id, student_stage) => (dispatch) => {
+export const deletePatient = (patient_id, patient_stage) => (dispatch) => {
     axios
-        .delete(`/api/patients/${student_id}`)
+        .delete(`/api/patients/${patient_id}`)
         .then(() => {
-            dispatch(getStudents({ stage: student_stage }));
+            dispatch(getPatients({ stage: patient_stage }));
         })
         .catch((err) => {
             dispatch({
