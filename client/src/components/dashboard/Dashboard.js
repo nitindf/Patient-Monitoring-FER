@@ -12,7 +12,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    //const { user } = this.props.auth;
+    const { user } = this.props.auth;
 
     return (
       <div style={{  }} className="">
@@ -25,7 +25,12 @@ class Dashboard extends Component {
             </h4>
           </div>
           <div>
-            <SidebarTemplate />
+            <SidebarTemplate>
+              <div className="landing-copy col s12 left-align">
+                <br></br>
+                <span style={{ fontFamily: "monospace",fontSize: "20pt" }}>Welcome <b>{user.name.split(" ")[0]}!</b></span> 
+              </div>
+            </SidebarTemplate>
           </div>
         </div>
       </div>

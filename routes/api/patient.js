@@ -29,7 +29,6 @@ router.post('/create',
         patientData.location = req.body.location;
         patientData.stage = req.body.stage;
         patientData.level = req.body.level;
-        //patientData.recordings = req.body.recordings.time;
 
         const patient = new Patient(patientData);
         patient.save()
