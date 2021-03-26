@@ -54,22 +54,28 @@ const Monitor = (props) => {
 
   const findMax = (obj) => {
     let expression = Object.keys(obj).reduce((a, b) => obj[a] > obj[b] ? a : b);
-    // let temp = [...state.recordings]
-    updateRecordings([...state.recordings, { expression }])
+    updateRecordings([...state.recordings, { expression } ]);
   }
 
   const updateRecordings = (recordings) => {
     recordings = recordings.sort((a, b) => new Date(b.date) - new Date(a.date));
     recordings.reverse();
+    let temp = state;
+    temp.recordings = [...recordings];
+    _setState(temp);
+    console.log(state.recordings.length)
+  }
+
+  const updateApi = () => {
     axios
-      .put(`/api/patients/${props.match.params.patient_id}`, { recordings: [...recordings] })
-      .then((res) => {
-        console.log(res.data)
-        _setState(res.data);
-      })
+    .put(`/api/patients/${props.match.params.patient_id}`, { ...state })
+    .then((res) => {
+      console.log("api", res.data.recordings)
+    })
   }
 
   const handleVideoOnPlay = () => {
+    setInterval(updateApi, 30000);
     setInterval(async () => {
       if (initializing) {
         setInitializing(false);
@@ -84,7 +90,7 @@ const Monitor = (props) => {
       if (resizedDetections.length > 0) {
         findMax(resizedDetections[0].expressions)
       }
-    }, 1000)
+    }, 3000)
   }
 
 

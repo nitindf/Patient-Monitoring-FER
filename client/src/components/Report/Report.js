@@ -20,7 +20,7 @@ class Report extends Component {
                         ...res.data,
                     })
                 })
-        }, 5000); // 1 minute = 60000 milliseconds
+        }, 2000); // 1 minute = 60000 milliseconds
     }
 
     render() {
