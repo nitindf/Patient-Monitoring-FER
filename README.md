@@ -8,8 +8,8 @@ Run client & server with concurrently
 ```
 npm run dev
 ```
-![Dashboard](https://github.com/nitindf/Patient-Monitoring-FER/tree/dashboard/client/src/images/Dashboard.jpg?raw=true)
+![Dashboard](https://github.com/nitindf/Patient-Monitoring-FER/tree/dashboard/client/src/images/Dashboard.jpg)
 
-![Face Detection](https://github.com/nitindf/Patient-Monitoring-FER/tree/dashboard/client/src/images/FaceDetection.jpg?raw=true)
+![Face Detection](https://github.com/nitindf/Patient-Monitoring-FER/tree/dashboard/client/src/images/FaceDetection.jpg)
 
-![View Report](https://github.com/nitindf/Patient-Monitoring-FER/tree/dashboard/client/src/images/ViewReport.jpg?raw=true)
+![View Report](https://github.com/nitindf/Patient-Monitoring-FER/tree/dashboard/client/src/images/ViewReport.jpg)
