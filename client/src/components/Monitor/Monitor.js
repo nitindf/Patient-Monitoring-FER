@@ -114,3 +114,6 @@ const Monitor = (props) => {
 }
 
 export default Monitor;
+
+//node server.js
+//npm run client
