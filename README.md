@@ -9,11 +9,11 @@ Run client & server with concurrently
 npm run dev
 ```
 
-## SCREENSHOTS
+### SCREENSHOTS
 
 #### Dashboard
 
-<img src="https://github.com/nitindf/Patient-Monitoring-FER/tree/dashboard/client/src/images/Dashboard.jpg">
+<img src="https://github.com/nitindf/Patient-Monitoring-FER/tree/dashboard/client/src/images/Dashboard.jpg" style="border-radius: 15px">
 
 #### Face Detection 
 
