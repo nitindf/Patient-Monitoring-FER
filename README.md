@@ -13,13 +13,12 @@ npm run dev
 
 #### Dashboard
 
-<img src="https://github.com/nitindf/Patient-Monitoring-FER/tree/dashboard/client/src/images/Dashboard.jpg" style="border-radius: 15px">
+![Screenshot](/client/src/images/Dashboard.jpg)
 
 #### Face Detection 
 
-<img src="https://github.com/nitindf/Patient-Monitoring-FER/tree/dashboard/client/src/images/FaceDetection.jpg">
+![Screenshot](/client/src/images/FaceDetection.jpg)
 
 #### View Report
 
-<img src="https://github.com/nitindf/Patient-Monitoring-FER/tree/dashboard/client/src/images/ViewReport.jpg">
-
+![Screenshot](/client/src/images/ViewReport.jpg)
