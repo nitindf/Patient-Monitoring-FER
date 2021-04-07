@@ -9,7 +9,7 @@ Run client & server with concurrently
 npm run dev
 ```
 
-### SCREENSHOTS
+## SCREENSHOTS
 
 #### Dashboard
 
