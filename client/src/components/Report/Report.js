@@ -48,8 +48,8 @@ class Report extends Component {
                                     {this.state.recordings.map((instance, index) => {
                                         // console.log(instance)
                                         var timestamp = (Date(instance.time)).split(',');
-                                        var date = timestamp[0];
-                                        
+                                        //var date = timestamp[0];
+                                        var date ="14-08-21";
                                         var time = timestamp[1];
                                         return(
                                             <tr key={index}>
